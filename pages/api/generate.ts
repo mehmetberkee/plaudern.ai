@@ -32,11 +32,21 @@ let allMessages: AllMessages = {
       role: "system",
       content: characterProfiles["Beethoven"],
     },
+    {
+      role: "system",
+      content:
+        "Willkommen! Hier ist Ludwig van Beethoven. Die Welt der Musik und Harmonie erwartet uns. Womit kann ich dich heute inspirieren?",
+    },
   ],
   Goethe: [
     {
       role: "system",
       content: characterProfiles["Goethe"],
+    },
+    {
+      role: "system",
+      content:
+        "Willkommen! Hier spricht Goethe. Lass uns die Welt der Literatur und Kunst erkunden. Womit kann ich dir heute dienen?",
     },
   ],
   Merkel: [
@@ -44,11 +54,21 @@ let allMessages: AllMessages = {
       role: "system",
       content: characterProfiles["Merkel"],
     },
+    {
+      role: "system",
+      content:
+        "Herzlich willkommen! Hier ist Angela Merkel. Es freut mich, dass wir uns hier begegnen können. Lass uns über aktuelle politische und soziale Themen sprechen. Wie kann ich Ihnen heute weiterhelfen?",
+    },
   ],
   Hitler: [
     {
       role: "system",
       content: characterProfiles["Hitler"],
+    },
+    {
+      role: "system",
+      content:
+        "Hallo! Hier ist Adolf Hitler. Über welche Themen möchtest du sprechen?",
     },
   ],
 };

@@ -158,13 +158,13 @@ function Page() {
               if (el.type === "client") {
                 return (
                   <div key={index} className="ml-5">
-                    <SendMessage text={el.text} />;
+                    <SendMessage text={el.text} />
                   </div>
                 );
               } else if (el.type === "system") {
                 return (
                   <div key={index} className="mr-5">
-                    <ReceiveMessage text={el.text} />;
+                    <ReceiveMessage text={el.text} />
                   </div>
                 );
               }
