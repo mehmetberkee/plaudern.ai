@@ -12,11 +12,11 @@ interface InputFieldProps {
 }
 
 const InputField: FC<InputFieldProps> = (props) => {
-  const [inputValue, setInputValue] = useState("");
-  const [transcript, setTranscript] = useState("");
-  const [isRecording, setIsRecording] = useState(false);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [transcript, setTranscript] = useState<string>("");
+  const [isRecording, setIsRecording] = useState<boolean>(false);
   const recognitionRef = useRef<any>(null);
-  const inputRef = useRef(null);
+  const inputRef = useRef<any>(null);
   const startRecording = () => {
     setTranscript("");
     setIsRecording(true);
