@@ -12,7 +12,6 @@ interface AllMessages {
 
 const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true,
 });
 
 let allMessages: AllMessages = {
@@ -68,12 +67,20 @@ export async function sendMsgtoOpenAI(
     top_p: 1,
     frequency_penalty: 0,
   });
+  if (
+    res &&
+    res.choices &&
+    res.choices[0] &&
+    res.choices[0].message &&
+    res.choices[0].message.content
+  ) {
+    allMessages[selectedUser].push({
+      role: "assistant",
+      content: res.choices[0].message.content,
+    });
 
-  // OpenAI'nin cevabını da önceki mesajlara ekleyin
-  allMessages[selectedUser].push({
-    role: "assistant",
-    content: res.choices[0].message.content,
-  });
-
-  return res.choices[0].message.content;
+    return res.choices[0].message.content;
+  } else {
+    throw new Error("Failed to retrieve message content from OpenAI");
+  }
 }

@@ -25,58 +25,6 @@ function Page() {
   const [showTyping, setShowTyping] = useState<boolean>(false);
   const [isMenuClicked, setIsMenuClicked] = useState<boolean>(false);
 
-  const menuClick = (): void => {
-    isMenuClicked ? setIsMenuClicked(false) : setIsMenuClicked(true);
-  };
-  useEffect(() => {
-    let typingTimer;
-    if (isTyping) {
-      typingTimer = setTimeout(() => {
-        setShowTyping(true);
-      }, 1000);
-    } else {
-      setShowTyping(false);
-    }
-
-    return () => clearTimeout(typingTimer);
-  }, [isTyping]);
-
-  const scrollToBottom = () => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
-    }
-  };
-
-  const handleSend = async (inputText) => {
-    if (inputText) {
-      setIsTyping(true);
-      // Kullanıcının mesajlarını al
-      const userMessages = messages[selectedUser] || [];
-
-      // Yeni mesajı ekleyin
-      const updatedMessages = [
-        ...userMessages,
-        { type: "client", text: inputText },
-      ];
-
-      // State'i güncelleyin
-      setMessages({
-        ...messages,
-        [selectedUser]: updatedMessages,
-      });
-
-      const res = await sendMsgtoOpenAI(inputText, selectedUser);
-      setIsTyping(false);
-      const systemMessage = { type: "system", text: res };
-
-      // Sistem mesajını ekleyin
-      setMessages((prevMessages) => ({
-        ...prevMessages,
-        [selectedUser]: [...prevMessages[selectedUser], systemMessage],
-      }));
-    }
-  };
-
   const [messages, setMessages] = useState<MessagesState>({
     Neuer: [
       {
@@ -110,9 +58,62 @@ function Page() {
     ],
   });
 
+  const menuClick = (): void => {
+    isMenuClicked ? setIsMenuClicked(false) : setIsMenuClicked(true);
+  };
+  let typingTimer: NodeJS.Timeout | undefined;
+  useEffect(() => {
+    if (isTyping) {
+      typingTimer = setTimeout(() => {
+        setShowTyping(true);
+      }, 1000);
+    } else {
+      setShowTyping(false);
+    }
+
+    return () => {
+      if (typingTimer) {
+        clearTimeout(typingTimer);
+      }
+    };
+  }, [isTyping]);
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
+  };
+
+  const handleSend = async (inputText: string) => {
+    if (inputText) {
+      setIsTyping(true);
+      const userMessages = messages[selectedUser] || [];
+
+      const updatedMessages: Message[] = [
+        ...userMessages,
+        { type: "client", text: inputText },
+      ];
+
+      setMessages((prevMessages) => ({
+        ...prevMessages,
+        [selectedUser]: updatedMessages,
+      }));
+
+      const res = await sendMsgtoOpenAI(inputText, selectedUser);
+      setIsTyping(false);
+      const systemMessage: Message = { type: "system", text: res };
+
+      setMessages((prevMessages) => ({
+        ...prevMessages,
+        [selectedUser]: [...(prevMessages[selectedUser] || []), systemMessage],
+      }));
+    }
+  };
+
   return (
     <div
       className={`flex gap-3 items-center justify-center bg-[#080f1b] h-screen`}
@@ -156,18 +157,16 @@ function Page() {
             {messages[selectedUser].map((el, index) => {
               if (el.type === "client") {
                 return (
-                  <div className="ml-5">
-                    <SendMessage key={index} text={el.text} />;
+                  <div key={index} className="ml-5">
+                    <SendMessage text={el.text} />;
                   </div>
                 );
               } else if (el.type === "system") {
-                {
-                  return (
-                    <div className="mr-5">
-                      <ReceiveMessage key={index} text={el.text} />;
-                    </div>
-                  );
-                }
+                return (
+                  <div key={index} className="mr-5">
+                    <ReceiveMessage text={el.text} />;
+                  </div>
+                );
               }
               return null;
             })}
