@@ -18,7 +18,7 @@ interface Message {
 interface MessagesState {
   [key: string]: Message[];
 }
-const page: FC = () => {
+const Page: FC = () => {
   const [isTyping, setIsTyping] = useState<Boolean>(false);
   const { selectedUser } = useUser();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -188,4 +188,4 @@ const page: FC = () => {
   );
 };
 
-export default page;
+export default Page;
