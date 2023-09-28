@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        "hover-hover": { raw: "(hover: hover)" },
+      },
       keyframes: {
         blink: {
           "0%": { opacity: ".1" },

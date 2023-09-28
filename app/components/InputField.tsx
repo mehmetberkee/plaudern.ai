@@ -94,7 +94,7 @@ const InputField: FC<InputFieldProps> = (props) => {
       ) : (
         <button
           onClick={startRecording}
-          className=" flex justify-center items-center h-[48px] w-[60px] rounded-lg hover:bg-[#3f2b96] transition-all"
+          className=" flex justify-center items-center h-[48px] w-[60px] rounded-lg hover-hover:hover:bg-[#3f2b96] transition-all"
         >
           <svg
             viewBox="0 0 256 256"
@@ -109,7 +109,7 @@ const InputField: FC<InputFieldProps> = (props) => {
         </button>
       )}
       <button
-        className=" bg-black text-white h-[48px] w-[60px] rounded-lg flex justify-center items-center hover:bg-[#3f2b96] transition-all mr-2"
+        className=" bg-black text-white h-[48px] w-[60px] rounded-lg flex justify-center items-center hover-hover:hover:bg-[#3f2b96] transition-all mr-2"
         onClick={handleSendClick}
       >
         <svg

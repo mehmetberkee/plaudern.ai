@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className=" bg-[#17181C]">
       <Header />
-      <div className="flex flex-1 flex-col justify-center items-center h-[calc(100vh-88px)] text-center px-4 ">
+      <div className="flex flex-1 flex-col justify-center items-center h-[calc(100vh-72.8px)] text-center px-4 ">
         <h1 className="mx-auto max-w-4xl font-display text-5xl font-bold tracking-normal text-gray-300 sm:text-7xl">
           Learn German by Chatting with the{" "}
           <span className="relative whitespace-nowrap text-blue-600">
@@ -19,7 +19,7 @@ export default function Home() {
         </h2>
         <div className="flex justify-center items-center space-x-2  ">
           <Link
-            href="whisper"
+            href="chat"
             className="bg-[#2563EB] text-white rounded-md px-6 py-2 hover:bg-blue-500 transition-all"
           >
             Try for free
