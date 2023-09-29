@@ -150,7 +150,7 @@ function Page() {
         />
         <div className="lg:w-[750px] md:w-[600px] w-full h-3/4 bg-[#121a2a] pt-10 rounded-lg">
           <div
-            className="flex flex-col md:gap-1 overflow-y-auto scrollbar-hide"
+            className="flex flex-col md:gap-5 gap-3 overflow-y-auto scrollbar-hide"
             style={{ maxHeight: "calc(100% - 50px)" }}
             ref={messagesEndRef}
           >
