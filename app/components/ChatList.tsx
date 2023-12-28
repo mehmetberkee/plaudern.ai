@@ -10,7 +10,6 @@ const ChatList: FC = () => {
         <Person src="/Beethoven.jpg" name="Beethoven" text="Pianist" />
         <Person src="/Goethe.jpg" name="Goethe" text="Dichter" />
         <Person src="/Merkel.jpg" name="Merkel" text="Politikerin" />
-        <Person src="/Hitler.jpg" name="Hitler" text="Diktator" />
       </div>
       <div>
         <Credits />
